@@ -10,7 +10,6 @@ namespace algorytm11
     {
         int lporzadkowa;
         double osad;
-        punkty polozenie;
         public krople()
         {
             lporzadkowa = 0;
@@ -23,20 +22,16 @@ namespace algorytm11
         {
             return k.osad;
         }
-        public static punkty getpolozenie(krople k)
-        {
-            return k.polozenie;
-        }
         public static void erozja(krople k, polaczenia pol)
         {
             double wynik = 0; 
             double nachylenie = polaczenia.getnachylenie(pol);
-            wynik = Math.Exp(2.93 * nachylenie); //dla 90 stopni jest ~100
-            if (wynik > 20)
+            wynik = Math.Exp(2.93 * nachylenie); 
+            if (wynik >80)
             {
-                k.osad = 0.2 * wynik; //nie można przesadzić, max 10% zabierze woda
+                k.osad = 0.1 * wynik; 
             }
-            else k.osad = 0.15 * wynik;
+            else k.osad = 0.1 * wynik;
         }
         public static void ruch(krople k, int liczba, punkty ppocz, polaczenia[] pol, int lpolaczen) //jeden ruch kropli
         {
@@ -55,8 +50,6 @@ namespace algorytm11
             {
                 polaczenia.obliczrwys(pol[i]);  //z uwagi na erozje to sie zmienia!!!
                 polaczenia.oblicznachylenie(pol[i]);
-              //  System.Console.WriteLine(polaczenia.getnachylenie(pol[i]));
-                //System.Console.ReadKey();
                 czynnik = polaczenia.getnachylenie(pol[i]);
                 
                 if (czynnik > polaczenia.getnachylenie(najlepsze))
@@ -71,8 +64,10 @@ namespace algorytm11
             p2=polaczenia.getpkonc(najlepsze);
             punkty.dodajkrople(p2);
             krople.erozja(k, najlepsze);
-            punkty.setwysokosc(p1, punkty.getwysokosc(p1) - k.osad);
-            punkty.setwysokosc(p2, punkty.getwysokosc(p2) + k.osad);
+            punkty.setwysokosc(p1, punkty.getwysokosc(p1)-k.osad);
+            punkty.setwysokosc(p2, punkty.getwysokosc(p2)+k.osad);
+   //         System.Console.WriteLine(punkty.getwysokosc(p1)+" "+punkty.getlporzadkowa(p2)+" "+punkty.getwysokosc(p2));
+     //       System.Console.ReadKey();
             //druga krawedz
             if (liczba < 3000)
             {
@@ -98,8 +93,8 @@ namespace algorytm11
                 p1 = polaczenia.getppocz(najlepsze);
                 p2 = polaczenia.getpkonc(najlepsze);
                 krople.erozja(k, najlepsze);
-                punkty.setwysokosc(p1, punkty.getwysokosc(p1) - k.osad);
-                punkty.setwysokosc(p2, punkty.getwysokosc(p2) + k.osad/2); //przez 2 bo część poleci "dalej" czego nie uwzględniamy 
+                punkty.setwysokosc(p1, punkty.getwysokosc(p1)- k.osad);
+                punkty.setwysokosc(p2, punkty.getwysokosc(p2)+ k.osad); //przez 2 bo część poleci "dalej" czego nie uwzględniamy 
             }
         }
     }

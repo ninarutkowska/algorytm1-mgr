@@ -75,10 +75,19 @@ namespace algorytm11
                     ofer[j] = new oferty();
                     if (s1 != null && s1 != "")
                     {
-                        oferty.setwlasnosci(ofer[j], s1, ppocz);
+                        oferty.setwlasnosci(ofer[j], s1, ppocz,j-1,ofer);
                         oferty.setlporzadkowa(ofer[j], j);
                     }
-                    if (oferty.getczyaktywna(ofer[j]) == true) j++;
+                    for (i = 0; i < j; i++) //powtarzające się oferty!!!!!!!!!!
+                    {
+                        if (daty.getdzien(oferty.getdatazal(ofer[i])) == daty.getdzien(oferty.getdatazal(ofer[j])) && daty.getmiesiac(oferty.getdatazal(ofer[i])) == daty.getmiesiac(oferty.getdatazal(ofer[j])) && daty.getrok(oferty.getdatazal(ofer[i])) == daty.getrok(oferty.getdatazal(ofer[j])) && oferty.getwspzal1(ofer[i]) == oferty.getwspzal1(ofer[j]) && oferty.getwspzal2(ofer[i]) == oferty.getwspzal2(ofer[j]) && oferty.getwsproz1(ofer[i]) == oferty.getwsproz1(ofer[j]) && oferty.getwsproz2(ofer[i]) == oferty.getwsproz2(ofer[j]))
+                        {
+                            oferty.setaktywna(ofer[j], false);
+                            i = j;
+                        }
+
+                    }
+                        if (oferty.getczyaktywna(ofer[j]) == true) j++;
                 }
                 sb.AppendLine(s1);
                 sr.Close();
@@ -105,16 +114,14 @@ namespace algorytm11
                     if (oferty.getczyaktywna(ofer[j - 1]) == true)
                     {
                         b = punkty.czyistpolaczenie(pun[i], 90, 3, 0, ofer[j - 1]);
-                        if (b == true )
+                        if (b == true)
                         {
                             if (oferty.getczyistnieje(ofer[j - 1]) == false)
                             {
                                 lpunktow++;
                                 pun[lpunktow] = punkty.ofertanapunkt(ofer[j - 1], lpunktow);
                                 tablicasasiedztwa.dodajelement(t, i, j - 1);
-                                //System.Console.WriteLine(tablicasasiedztwa.odczytajztablicy(t, i, j - 1));
-                                //System.Console.ReadKey();
-                                oferty.setczyistnieje(ofer[j - 1],lpunktow);
+                                oferty.setczyistnieje(ofer[j - 1], lpunktow);
                             }
                             else
                             {
@@ -126,6 +133,12 @@ namespace algorytm11
                 }
             }
             lpunktow2w=lpunktow-lpunktow1w;
+            for (i = 1; i < lpunktow; i++)
+            {
+                czynnikfrachtow[i] = frachty.porownujfrachty(fra, pun[i], lfrachtow);
+                if (i <= lpunktow1w) punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 1, ppocz);
+                else punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 2, ppocz);
+            }
             for (i = 0; i < lpunktow; i++) //polaczenia
             {
                 l = 0;
@@ -157,12 +170,7 @@ namespace algorytm11
                 lpolaczen++;
             }
             
-            for (i = 1; i < lpunktow; i++)
-            {
-                czynnikfrachtow[i]=frachty.porownujfrachty(fra, pun[i], lfrachtow);
-                if (i <= lpunktow1w) punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 1);
-                else punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 2);
-            }
+            
             for (i = 0; i < 3000;i++) krople.ruch(krop[i], i + 1, ppocz, pol, lpolaczen);
             punkty.porownajpunkty(pun, lpunktow1w);
 

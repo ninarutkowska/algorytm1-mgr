@@ -51,7 +51,7 @@ namespace algorytm11
         {
             d.godzina = k;
         }
-        public static int roznicaczasu(daty data1, daty data2)
+        public static int roznicaczasu(daty data1, daty data2) //nie bierze pod uwagę roku!
         {
             int dzien1 = daty.getdzien(data1);
             int miesiac1 = daty.getmiesiac(data1);

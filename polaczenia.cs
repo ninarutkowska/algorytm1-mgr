@@ -58,7 +58,8 @@ namespace algorytm11
         }
         public static void oblicznachylenie(polaczenia pol)
         {
-            pol.nachylenie = Math.Atan(pol.roznicawysokosci / pol.odleglosc);
+            if (pol.roznicawysokosci > 0) pol.nachylenie = Math.Atan(pol.roznicawysokosci / pol.odleglosc);
+            else pol.nachylenie = 0;
         }
         public static double getnachylenie(polaczenia p)
         {

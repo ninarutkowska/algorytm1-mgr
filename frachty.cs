@@ -419,8 +419,8 @@ namespace algorytm11
             double wspp2;
             int odleglosc;
             double liczba=0;
-            int mnoznikc=0;
-            int mnoznikk = 0;
+            double mnoznikc=0;
+            double mnoznikk = 0;
 
             datap = punkty.getdata(p);
             wspp1 = punkty.getwspr1(p);
@@ -428,32 +428,33 @@ namespace algorytm11
             for (int i = 0; i < lfrachtow-1; i++)
             {
                 data1 = frachty.getdzal(f[i]);
-                if (daty.roznicaczasu(data1,datap) > -30 && daty.roznicaczasu(data1, datap) < 30)
+                if (daty.roznicaczasu(data1,datap) > -15 && daty.roznicaczasu(data1, datap) < 15)
                 {
                     wsp1 = frachty.getwspzal1(f[i]);
                     wsp2 = frachty.getwspzal2(f[i]);
                     odleglosc = (int)(Math.Acos((Math.Sin(wsp1 * Math.PI / 180) * Math.Sin(wspp1 * Math.PI / 180) + Math.Cos(wsp1 * Math.PI / 180) * Math.Cos(wspp1 * Math.PI / 180) * Math.Cos((wsp2 - wspp2) * Math.PI / 180))) * 6371);
                     if (odleglosc <= 90)
                     {
-                        if (frachty.getcenakm(f[i]) <= 1) mnoznikc = 1;
+                        if (frachty.getcenakm(f[i]) <= 1.5) mnoznikc = 0.9 * frachty.getcenakm(f[i]);
                         else
                         {
-                            if (frachty.getcenakm(f[i]) <= 2) mnoznikc = 2;
+                            if (frachty.getcenakm(f[i]) <= 2) mnoznikc = 1.1 * frachty.getcenakm(f[i]);
                             else
                             {
-                                mnoznikc = 3;
+                                mnoznikc = 1.4 * frachty.getcenakm(f[i]);
                             }
                         }
-                        if (frachty.getkilometry(f[i]) <= 500) mnoznikk = 1;
+                        if (frachty.getkilometry(f[i]) <= 500) mnoznikk = 0.9 * frachty.getkilometry(f[i]) / 1000;
                         else
                         {
-                            if (frachty.getkilometry(f[i]) <= 1000) mnoznikk = 2;
+                            if (frachty.getkilometry(f[i]) <= 1000) mnoznikk = 1.1 * frachty.getkilometry(f[i]) / 1000;
                             else
                             {
-                                mnoznikk = 3;
+                                if (frachty.getkilometry(f[i]) <= 1500) mnoznikk = 1.3*frachty.getkilometry(f[i])/1000;
+                                else mnoznikk = 1.6 * frachty.getkilometry(f[i]) / 1000;
                             }
                         }
-                        liczba=liczba+mnoznikc+0.5*mnoznikk;
+                        liczba=liczba+0.6*mnoznikc+0.4*mnoznikk;
                     }
                 }
             }

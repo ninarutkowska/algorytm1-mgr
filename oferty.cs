@@ -45,9 +45,9 @@ namespace algorytm11
         {
             return o.czyaktywna;
         }
-        public static void setaktywna(oferty o)
+        public static void setaktywna(oferty o, bool t)
         {
-            o.czyaktywna = false;
+            o.czyaktywna = t;
         }
         public static int getdltrasy(oferty o)
         {
@@ -86,7 +86,7 @@ namespace algorytm11
         {
             return o.wsproz2;
         }
-        public static void setwlasnosci(oferty p, string s, punkty punkt)
+        public static void setwlasnosci(oferty p, string s, punkty punkt, int liczba, oferty[] o)
         {
             char[] c = new char[20];
             int i = 0;
@@ -283,9 +283,9 @@ namespace algorytm11
                     }
                 }
                 p.wsproz2 = minus * p.wsproz2;
-
             }
             else p.czyaktywna = false;
+            oferty.setdltrasy(p);
         }
     }
 }
