@@ -1,0 +1,6 @@
+1. Plik z ofertami jest ograniczony- chodzi tylko o prędkość działania- od 3 do 10.03.14. Początek na 3 lub 4.3.14 najlepiej
+2. 1 ciężarówka na raz- przy większej ilości obawiam się że mój komputer nie wyrobi, dużo większa ilość obiektów a jednak sprzęt ma te prawie 6 lat
+3. Komentarze i niepotrzebne linijki będą usunięte
+4. Dodatkowe pliki z frachtami- nie jestem pewna ale to nie robi zbytnio. dane do frachtów historycznych które one dotyczą, w tym długość są pobierane z pliku. 
+Te dodatkowe dane (czyli ilość kroków) są dla niecałych 2tys frachtów, gdzie pierwotnie mamy około 9tys. Nie jestem pewna czy to jest sens je tu wrzucać. 
+Mam to jednak przerobione na tyle w excelu że uwzględnienie to jest około pół godziny roboty, jednak to są tylko dla części danych informacje- jest sens?
