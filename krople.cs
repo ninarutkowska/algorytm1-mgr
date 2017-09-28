@@ -27,13 +27,9 @@ namespace algorytm11
             double wynik = 0; 
             double nachylenie = polaczenia.getnachylenie(pol);
             wynik = Math.Exp(2.93 * nachylenie); 
-            if (wynik >80)
-            {
-                k.osad = 0.1 * wynik; 
-            }
-            else k.osad = 0.1 * wynik;
+            k.osad = 0.1 * wynik;
         }
-        public static void ruch(krople k, int liczba, punkty ppocz, polaczenia[] pol, int lpolaczen) //jeden ruch kropli
+        public static void ruch(krople k, int liczba, punkty ppocz, polaczenia[] pol, int lpolaczen) 
         {
             int i=0;
             int l = 0;
@@ -42,13 +38,13 @@ namespace algorytm11
             double czynnik = 0;
             polaczenia najlepsze = new polaczenia();
             l = punkty.getlporzadkowa(ppocz);
-            punkty p0 = new punkty(); //punkt z pierwszego ruchu który się okaże "najlepszy"
+            punkty p0 = new punkty(); 
             while (polaczenia.getppocz(pol[i]) != ppocz) i++;
             najlepsze=pol[i];
             i++;
             while (polaczenia.getppocz(pol[i]) == ppocz)
             {
-                polaczenia.obliczrwys(pol[i]);  //z uwagi na erozje to sie zmienia!!!
+                polaczenia.obliczrwys(pol[i]);  
                 polaczenia.oblicznachylenie(pol[i]);
                 czynnik = polaczenia.getnachylenie(pol[i]);
                 
@@ -58,7 +54,6 @@ namespace algorytm11
                 }
                 i++;
             }
-           
             i = 0;
             p1=polaczenia.getppocz(najlepsze);
             p2=polaczenia.getpkonc(najlepsze);
@@ -66,8 +61,6 @@ namespace algorytm11
             krople.erozja(k, najlepsze);
             punkty.setwysokosc(p1, punkty.getwysokosc(p1)-k.osad);
             punkty.setwysokosc(p2, punkty.getwysokosc(p2)+k.osad);
-   //         System.Console.WriteLine(punkty.getwysokosc(p1)+" "+punkty.getlporzadkowa(p2)+" "+punkty.getwysokosc(p2));
-     //       System.Console.ReadKey();
             //druga krawedz
             if (liczba < 3000)
             {

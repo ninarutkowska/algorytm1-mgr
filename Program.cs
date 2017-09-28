@@ -101,6 +101,7 @@ namespace algorytm11
                 {
                     lpunktow++;
                     pun[lpunktow]=punkty.ofertanapunkt(ofer[i - 1],lpunktow);
+
                     tablicasasiedztwa.dodajelement(t, 0, lpunktow);
                 }
             }
@@ -127,6 +128,7 @@ namespace algorytm11
                             {
                                 tablicasasiedztwa.dodajelement(t, i, oferty.getnrpunktu(ofer[j - 1]));
                             }
+                            punkty.setlsasiadow(pun[i], punkty.getlsasiadow(pun[i]) + 1);
                         }
                     }
 
@@ -138,6 +140,7 @@ namespace algorytm11
                 czynnikfrachtow[i] = frachty.porownujfrachty(fra, pun[i], lfrachtow);
                 if (i <= lpunktow1w) punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 1, ppocz);
                 else punkty.obliczwysokosc(pun[i], czynnikfrachtow[i], 2, ppocz);
+
             }
             for (i = 0; i < lpunktow; i++) //polaczenia
             {
@@ -157,11 +160,9 @@ namespace algorytm11
                     }
                 }
                 punkty.setlsasiadow(pun[i], l);
-                //System.Console.WriteLine(l);
-                //System.Console.ReadKey();
             }
             System.Console.WriteLine(lpolaczen);
-            for (i = punkty.getlsasiadow(ppocz)+1; i < lpunktow;i++) //polaczenie koncowe
+            for (i = punkty.getlsasiadow(ppocz) + 1; i < lpunktow; i++) //polaczenie koncowe
             {
                 pol[lpolaczen] = new polaczenia();
                 polaczenia.setppocz(pol[lpolaczen], pun[i]);
@@ -169,9 +170,14 @@ namespace algorytm11
                 polaczenia.obliczrwys(pol[lpolaczen]);
                 lpolaczen++;
             }
-            
-            
-            for (i = 0; i < 3000;i++) krople.ruch(krop[i], i + 1, ppocz, pol, lpolaczen);
+            System.Console.WriteLine(punkty.getlsasiadow(pun[13]));
+
+
+            for (i = 0; i < 3000; i++)
+            {
+                krople.ruch(krop[i], i + 1, ppocz, pol, lpolaczen);
+              
+            }
             punkty.porownajpunkty(pun, lpunktow1w);
 
             System.Console.ReadKey();

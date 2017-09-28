@@ -454,7 +454,7 @@ namespace algorytm11
                                 else mnoznikk = 1.6 * frachty.getkilometry(f[i]) / 1000;
                             }
                         }
-                        liczba=liczba+0.6*mnoznikc+0.4*mnoznikk;
+                        liczba=liczba+0.6*mnoznikc+0.4*mnoznikk-odleglosc/100;
                     }
                 }
             }

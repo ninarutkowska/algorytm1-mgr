@@ -8,12 +8,9 @@ namespace algorytm11
 {
     class tablicasasiedztwa
     {
-        int iloscwierszy; //w dół które się łączą, w bok z którymi
-        int ilosckolumn;
         int[,] elementy=new int[15000,15000];
         public tablicasasiedztwa()
         {
-           // int[,] elementy = new int[15000, 15000];
             for (int i = 0; i < 15000; i++)
             {
                 for (int j = 0; j < 15000; j++)
@@ -22,8 +19,6 @@ namespace algorytm11
                     this.elementy[i,j] = 0;
                 }
             }
-            ilosckolumn = 0;
-            iloscwierszy = 0;
         }
         public static void dodajelement(tablicasasiedztwa t, int w, int k)
         {

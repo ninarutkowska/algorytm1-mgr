@@ -125,7 +125,6 @@ namespace algorytm11
                 k++;
             }
             daty.setdzien(p.datazal, d);
-            // System.Console.Write(d);
 
             d = 0;
             j = 0;

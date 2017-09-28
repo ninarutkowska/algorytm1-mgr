@@ -135,14 +135,14 @@ namespace algorytm11
         {
             double c=0;
             double d=0;
-            if (punkty.getdltrasy(o) < 500) c = 0.8 * punkty.getdltrasy(o) / 10;
-            else if (punkty.getdltrasy(o) < 1000) c = punkty.getdltrasy(o) / 10;
-            else if (punkty.getdltrasy(o) < 1500) c = 1.2 * punkty.getdltrasy(o) / 10;
-            else c = 1.4 * punkty.getdltrasy(o) / 50;
+            if (punkty.getdltrasy(o) < 500) c = 0.8 * punkty.getdltrasy(o) /5;
+            else if (punkty.getdltrasy(o) < 1000) c = punkty.getdltrasy(o) /5;
+            else if (punkty.getdltrasy(o) < 1500) c = 1.2 * punkty.getdltrasy(o)/5 ;
+            else c = 1.4 * punkty.getdltrasy(o) /5;
             if (warstwa == 1)
             {
-                d = daty.roznicaczasu(punkty.getdata(o), punkty.getdata(ppocz));
-                if (d > 1) c = c / 1.5;
+                d = daty.roznicaczasu( punkty.getdata(ppocz),punkty.getdata(o));
+                if(d>1)c = c /1.5;
             }
             return c;
         }
@@ -151,10 +151,8 @@ namespace algorytm11
             int i = 0;
             int j = 0;
             double h = 0;
-            if (warstwa == 1) h =1000-( punkty.getlsasiadow(p) + czynnikfrachtow+obliczczynnikpunktu(p,1,ppocz));
+            if (warstwa == 1) h =1000-( punkty.getlsasiadow(p)+punkty.obliczczynnikpunktu(p,1,ppocz) + czynnikfrachtow);
             if (warstwa == 2) h =500-( czynnikfrachtow+obliczczynnikpunktu(p,2,ppocz));
-            //System.Console.WriteLine(punkty.getlsasiadow(p) + " " + czynnikfrachtow + " " + obliczczynnikpunktu(p, 1, ppocz));
-            //System.Console.ReadKey();
             p.wysokosc = h;
         }
         public static bool czyistpolaczenie(punkty poczatek, int maxodleglosc, int maxczas, int minczas, oferty o)
@@ -174,7 +172,7 @@ namespace algorytm11
             double wspo1;
             double wspo2;
             int roznicakm = 0;
-            int roznicadni; //zakladamy ze oferty tylko aktualne!!!
+            int roznicadni; 
             int k = 2;
             dzien2 = daty.getdzien(oferty.getdatazal(o));
             miesiac2 = daty.getmiesiac(oferty.getdatazal(o));
@@ -289,7 +287,6 @@ namespace algorytm11
         }
         public static punkty ofertanapunkt(oferty o, int i)
         {
-            
             punkty p=new punkty();
             p.data = oferty.getdatazal(o);
             p.dltrasy = oferty.getdltrasy(o);
@@ -318,9 +315,9 @@ namespace algorytm11
                 }
                 j++;
             }
-            for(j=liczba-6;j<=liczba-1;j++)
+            for(j=liczba-1;j>=liczba-5;j--)
             {
-                System.Console.WriteLine(liczba-j +" miejsce z prawdopodobienstwem "+ p[j].liczbakropel + "/3000:"+" "+punkty.getlporzadkowa(p[j]));
+                System.Console.WriteLine(liczba-j +" miejsce z prawdopodobienstwem "+ p[j].liczbakropel + "/3000:"+" ");
                 System.Console.WriteLine("współrzędne załadunku: "+p[j].wspz1+";"+p[j].wspz2);
                 System.Console.WriteLine("współrzędne rozładunku: " + p[j].wspr1 + ";" + p[j].wspr2);
                 System.Console.WriteLine("data załadunku: " + daty.getdzien(p[j].data) + "/" + daty.getmiesiac(p[j].data) + "/" + daty.getrok(p[j].data));
